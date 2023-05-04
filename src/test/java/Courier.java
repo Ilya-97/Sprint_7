@@ -7,21 +7,20 @@ import static io.restassured.RestAssured.given;
 
 public class Courier {
 
-    UserData userData = new UserData();
-    String newUser = "{\"login\": \"" + userData.randomLogin + "\", \"password\": \"" + userData.randomPassword + "\", \"firstName\": \"" + userData.randomFirstName + "\"}";
-    String loginForm = "{\"login\": \"" + userData.randomLogin + "\", \"password\": \"" + userData.randomPassword + "\"}";
-    String loginFormInvalid = "{\"login\": \"" + userData.randomPassword + "\", \"password\": \"" + userData.randomLogin + "\"}";
-    String loginFormWithoutParam = "{\"login\": \"" + userData.randomLogin + "\", \"password\": \"\"}";
-    String createFormWithoutParam = "{\"login\": \"" + userData.randomLogin + "\"}";
+    UserData newUser = new UserData("katamaran", "qwerty", "saske");
+    UserData loginForm = new UserData("katamaran", "qwerty");
+    UserData loginFormInvalid = new UserData("ninja", "4321", "saske");
+    UserData loginFormWithoutParam = new UserData("ninja", "");
+    UserData createFormWithoutParam = new UserData("ninja");
 
 
-    public Response createCourier(String paramNewUser) {
-        Response response = given().header("Content-type", "application/json").and().body(paramNewUser).post("/api/v1/courier");
+    public Response createCourier(Object object) {
+        Response response = given().header("Content-type", "application/json").and().body(object).post("/api/v1/courier");
         return response;
     }
 
-    public Response loginCourier(String formLogin) {
-        Response responseLogin = given().header("Content-type", "application/json").body(formLogin).post("/api/v1/courier/login");
+    public Response loginCourier(Object object) {
+        Response responseLogin = given().header("Content-type", "application/json").body(object).post("/api/v1/courier/login");
         return responseLogin;
     }
 

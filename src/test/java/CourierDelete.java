@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
@@ -14,7 +15,11 @@ public class CourierDelete extends Courier {
         createCourier(newUser);
         CourierId courierId = loginCourier(loginForm).as(CourierId.class);
         Response response = given().header("Content-type", "application/json").and().body(courierId).delete("/api/v1/courier/" + courierId.getId() + "");
+        //Gson gson = new Gson();
+        //String json = gson.toJson(courierId);
+
+        //System.out.println(courierId.getId());
+        //System.out.println(json);
         response.then().statusCode(200).body("ok", equalTo(true));
     }
 }
-

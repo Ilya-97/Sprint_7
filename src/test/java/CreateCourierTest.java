@@ -17,7 +17,7 @@ public class CreateCourierTest extends Courier {
     @Description("If login already used.")
     public void createCourierAlreadyExists() {
         createCourier(newUser);
-        createCourier(newUser).then().statusCode(409).body("message", equalTo("Этот логин уже используется"));
+        createCourier(newUser).then().statusCode(409).body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
     @Test
